@@ -3,6 +3,7 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { Public } from 'src/decorator/customize';
 
 @Controller('users')
 export class UsersController {
@@ -13,7 +14,7 @@ export class UsersController {
   create(@UploadedFile(
     new ParseFilePipeBuilder()
       .addFileTypeValidator({
-        fileType: /^(image\/png|image\/jpeg|text\/plain|application\/pdf|jpg|jpeg|png|txt|pdf|gif)$/i,
+        fileType: /^(image\/png|image\/jpeg|jpg|jpeg|png|gif)$/i,
       })
       .addMaxSizeValidator({
         maxSize: 5000 * 1024
@@ -29,9 +30,14 @@ export class UsersController {
   findAll() {
     return this.usersService.findAll();
   }
+
+  @Post('by-email')
+  findOneByEmail(@Body("email") email: string) {
+    return this.usersService.findByEmail(email)
+  }
   @Get()
   fetchUserPaginate(@Query('page') page: string, @Query('limit') limit: string) {
-    return this.usersService.fetchUserPaginate(+page,+limit)
+    return this.usersService.fetchUserPaginate(+page, +limit)
 
   }
 
@@ -47,7 +53,7 @@ export class UsersController {
       fileIsRequired: false,
       validators: [
         new MaxFileSizeValidator({ maxSize: 5000 * 1024 }),
-        new FileTypeValidator({ fileType: /^(image\/png|image\/jpeg|text\/plain|application\/pdf|jpg|jpeg|png|txt|pdf|gif)$/i }),
+        new FileTypeValidator({ fileType: /^(image\/png|image\/jpeg|jpg|jpeg|png|gif)$/i }),
       ],
     }),) image: Express.Multer.File,
     @Body() updateUserDto: UpdateUserDto) {
@@ -60,4 +66,10 @@ export class UsersController {
   ) {
     return this.usersService.remove(+id);
   }
+  @Post('test')
+  @Public()
+  getDate() {
+    return this.usersService.setRefreshToken(1, '123');
+  }
 }
+

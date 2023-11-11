@@ -14,3 +14,14 @@ export class CreateUserDto {
 
 
 }
+
+export class RegisterUserDto {
+    @IsNotEmpty({ message: "Invalid Email" })
+    email: string;
+    @IsNotEmpty({ message: "Invalid Password" })
+    password: string;
+    @IsNotEmpty({ message: "Invalid Username" })
+    username: string;
+
+
+}

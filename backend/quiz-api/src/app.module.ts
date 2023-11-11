@@ -7,6 +7,7 @@ import { ConfigService } from '@nestjs/config';
 import { UsersModule } from './users/users.module';
 import { User } from './users/entities/user.entity';
 import { FilesModule } from './files/files.module';
+import { AuthModule } from './auth/auth.module';
 @Module({
   imports: [ConfigModule.forRoot({ isGlobal: true }), TypeOrmModule.forRootAsync({
     imports: [ConfigModule],
@@ -21,8 +22,8 @@ import { FilesModule } from './files/files.module';
       synchronize: true,
     }),
     inject: [ConfigService],
-  }), UsersModule, FilesModule],
+  }), UsersModule, FilesModule, AuthModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService,],
 })
 export class AppModule { }

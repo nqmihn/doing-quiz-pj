@@ -1,10 +1,12 @@
-import { Injectable } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
+import { BadRequestException, Injectable } from '@nestjs/common';
+import { CreateUserDto, RegisterUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import { genSaltSync, hashSync, compareSync } from 'bcryptjs'
+import moment from 'moment';
+import { IUser } from './user.interface';
 @Injectable()
 export class UsersService {
   constructor(
@@ -44,6 +46,10 @@ export class UsersService {
     return `This action returns a #${id} user`;
   }
 
+  async findByEmail(email: string) {
+    return await this.usersRepository.findOneBy({ email })
+  }
+
   async fetchUserPaginate(page: number, limit: number) {
     const offset = (page - 1) * limit;
     const defaultLimit = limit ? limit : 10;
@@ -56,13 +62,51 @@ export class UsersService {
       users
     }
   }
+  isValidPassword(password: string, hashPassword: string) {
+    return compareSync(password, hashPassword)
+  }
 
   async update(updateUserDto: UpdateUserDto, image: string) {
     const { id, username, role } = updateUserDto
     return await this.usersRepository.update({ id }, { username, role, image })
   }
+  setRefreshToken(id: number, refresh_token: string) {
 
+    return this.usersRepository.update({ id }, { refresh_token })
+  }
+  findByToken = (refresh_token: string) => {
+    return this.usersRepository.findOneBy({ refresh_token })
+  }
   async remove(id: number) {
     return await this.usersRepository.delete({ id });
+  }
+  register = async (registerUserDto: RegisterUserDto) => {
+    const { email, password, username } = registerUserDto
+    const newUser = this.usersRepository.create({
+      email,
+      password: this.getHashPassword(password),
+      username,
+      role: "USER"
+    });
+    const data = await this.usersRepository.save(newUser);
+    return {
+      id: data?.id,
+      email: data?.email,
+      username: data?.username,
+      role: data?.role,
+      createdAt: data?.createdAt,
+    }
+  }
+  changePassword = async (user: IUser, currentPassword: string, newPassword: string) => {
+    const { id } = user
+    const userData = await this.usersRepository.findOneBy({ id })
+    if (user && this.isValidPassword(currentPassword, userData.password)) {
+      await this.usersRepository.update({ id }, { password: this.getHashPassword(newPassword) })
+      return {
+        email: userData?.email
+      }
+    } else {
+      throw new BadRequestException("Current Password is wrong !")
+    }
   }
 }

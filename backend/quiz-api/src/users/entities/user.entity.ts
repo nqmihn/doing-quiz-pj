@@ -20,11 +20,8 @@ export class User {
     @Column({ nullable: true })
     image: string;
 
-    @Column({ nullable: true })
+    @Column({ nullable: true, type: 'text' })
     refresh_token: string;
-
-    @Column({ nullable: true })
-    refresh_expired: Date;
 
     @CreateDateColumn()
     createdAt: Date;
