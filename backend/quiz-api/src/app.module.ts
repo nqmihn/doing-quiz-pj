@@ -8,6 +8,12 @@ import { UsersModule } from './users/users.module';
 import { User } from './users/entities/user.entity';
 import { FilesModule } from './files/files.module';
 import { AuthModule } from './auth/auth.module';
+import { QuizzesModule } from './quizzes/quizzes.module';
+import { Quiz } from './quizzes/entities/quiz.entity';
+import { UserQuizModule } from './user-quiz/user-quiz.module';
+import { UserQuiz } from './user-quiz/entities/user-quiz.entity';
+import { QuizQuestionModule } from './quiz-question/quiz-question.module';
+import { QuizQuestion } from './quiz-question/entities/quiz-question.entity';
 @Module({
   imports: [ConfigModule.forRoot({ isGlobal: true }), TypeOrmModule.forRootAsync({
     imports: [ConfigModule],
@@ -18,11 +24,11 @@ import { AuthModule } from './auth/auth.module';
       username: configService.get<string>('DB_USERNAME'),
       password: configService.get<string>('DB_PASSWORD'),
       database: configService.get<string>('DB_NAME'),
-      entities: [User],
+      entities: [User, Quiz, UserQuiz, QuizQuestion],
       synchronize: true,
     }),
     inject: [ConfigService],
-  }), UsersModule, FilesModule, AuthModule],
+  }), UsersModule, FilesModule, AuthModule, QuizzesModule, UserQuizModule, QuizQuestionModule],
   controllers: [AppController],
   providers: [AppService,],
 })

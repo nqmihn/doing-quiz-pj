@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from 'typeorm';
+import { UserQuiz } from 'src/user-quiz/entities/user-quiz.entity';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, OneToMany } from 'typeorm';
 
 @Entity({})
 export class User {
@@ -32,4 +33,6 @@ export class User {
     @DeleteDateColumn()
     deletedAt: Date;
 
+    @OneToMany(() => UserQuiz, (userQuiz) => userQuiz.user)
+    userQuizzes: UserQuiz[]
 }
