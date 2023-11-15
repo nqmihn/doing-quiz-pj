@@ -9,11 +9,15 @@ export class UserQuiz {
     @PrimaryColumn()
     quizId: number;
 
-    @ManyToOne(() => User, user => user.userQuizzes)
+    @ManyToOne(() => User, user => user.userQuizzes, {
+        onDelete: "CASCADE",
+    })
     @JoinColumn({ name: 'userId' })
     user: User;
 
-    @ManyToOne(() => Quiz, quiz => quiz.userQuizzes)
+    @ManyToOne(() => Quiz, quiz => quiz.userQuizzes, {
+        onDelete: "CASCADE",
+    })
     @JoinColumn({ name: 'quizId' })
     quiz: Quiz;
 

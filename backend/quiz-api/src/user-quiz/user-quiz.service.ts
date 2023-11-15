@@ -14,10 +14,10 @@ export class UserQuizService {
   constructor(
     @InjectRepository(UserQuiz)
     private usersQuizRepository: Repository<UserQuiz>,
-    @InjectRepository(User)
-    private usersRepository: Repository<User>,
-    @InjectRepository(Quiz)
-    private quizzesRepository: Repository<Quiz>,
+    // @InjectRepository(User)
+    // private usersRepository: Repository<User>,
+    // @InjectRepository(Quiz)
+    // private quizzesRepository: Repository<Quiz>,
   ) { }
   create(createUserQuizDto: CreateUserQuizDto) {
     return 'This action adds a new userQuiz';
@@ -39,19 +39,15 @@ export class UserQuizService {
     return `This action removes a #${id} userQuiz`;
   }
   assign = async (createUserQuizDto: CreateUserQuizDto) => {
-    const { userId, quizId } = createUserQuizDto;
-    const user = await this.usersRepository.findOneBy({ id: userId })
-    const quiz = await this.quizzesRepository.findOneBy({ id: quizId })
-    if (user && quiz) {
-      const userQuiz = await this.usersQuizRepository.findOneBy({ userId, quizId });
-      if (userQuiz) {
-        throw new BadRequestException("Quiz has been assigned to this user")
-      }
-      const newQuiz = this.usersQuizRepository.create({ ...createUserQuizDto });
-      return await this.usersQuizRepository.save(newQuiz);
-    } else {
-      throw new BadRequestException("Invalid user/quiz");
+
+    const { userId, quizId } = createUserQuizDto
+    const userQuiz = await this.usersQuizRepository.findOneBy({ userId, quizId });
+    if (userQuiz) {
+      throw new BadRequestException("Quiz has been assigned to this user")
     }
+    const newQuiz = this.usersQuizRepository.create({ ...createUserQuizDto });
+    return await this.usersQuizRepository.save(newQuiz);
+
 
   }
   getQuizByUser = async (user: IUser) => {

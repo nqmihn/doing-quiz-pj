@@ -1,4 +1,14 @@
 import { PartialType } from '@nestjs/mapped-types';
 import { CreateQuizQuestionDto } from './create-quiz-question.dto';
+import { IsNotEmpty } from 'class-validator';
 
-export class UpdateQuizQuestionDto extends PartialType(CreateQuizQuestionDto) {}
+export class UpdateQuizQuestionDto {
+
+    quizId: number;
+    @IsNotEmpty({ message: "Invalid id" })
+    id: number;
+
+
+    @IsNotEmpty({ message: "Invalid description" })
+    description: string;
+}

@@ -5,12 +5,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { QuizQuestion } from './entities/quiz-question.entity';
 import { MulterModule } from '@nestjs/platform-express';
 import { MulterConfigService } from 'src/files/multer.config';
+import { UserQuizModule } from 'src/user-quiz/user-quiz.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([QuizQuestion]), MulterModule.registerAsync({
+  imports: [UserQuizModule,TypeOrmModule.forFeature([QuizQuestion]), MulterModule.registerAsync({
     useClass: MulterConfigService,
   }),],
   controllers: [QuizQuestionController],
-  providers: [QuizQuestionService]
+  providers: [QuizQuestionService],
+  exports: [QuizQuestionService],
 })
-export class QuizQuestionModule {}
+export class QuizQuestionModule { }

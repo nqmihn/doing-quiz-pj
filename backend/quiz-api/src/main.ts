@@ -6,6 +6,7 @@ import { ConfigService } from '@nestjs/config';
 import { ValidationPipe, VersioningType } from '@nestjs/common';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
 import cookieParser = require('cookie-parser');
+import { TransformInterceptor } from './core/transform.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(
@@ -18,6 +19,7 @@ async function bootstrap() {
   app.useGlobalGuards(new JwtAuthGuard(reflector))
   app.useGlobalPipes(new ValidationPipe())
   app.use(cookieParser())
+  app.useGlobalInterceptors(new TransformInterceptor(reflector))
   app.enableVersioning({
     type: VersioningType.URI,
     prefix: 'api/v',

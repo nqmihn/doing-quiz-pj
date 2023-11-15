@@ -14,6 +14,12 @@ import { UserQuizModule } from './user-quiz/user-quiz.module';
 import { UserQuiz } from './user-quiz/entities/user-quiz.entity';
 import { QuizQuestionModule } from './quiz-question/quiz-question.module';
 import { QuizQuestion } from './quiz-question/entities/quiz-question.entity';
+import { QuizAnswerModule } from './quiz-answer/quiz-answer.module';
+import { QuizAnswer } from './quiz-answer/entities/quiz-answer.entity';
+import { QuizUserAnswerModule } from './quiz-user-answer/quiz-user-answer.module';
+import { QuizUserAnswer } from './quiz-user-answer/entities/quiz-user-answer.entity';
+import { HistoryModule } from './history/history.module';
+import { History } from './history/entities/history.entity';
 @Module({
   imports: [ConfigModule.forRoot({ isGlobal: true }), TypeOrmModule.forRootAsync({
     imports: [ConfigModule],
@@ -24,11 +30,11 @@ import { QuizQuestion } from './quiz-question/entities/quiz-question.entity';
       username: configService.get<string>('DB_USERNAME'),
       password: configService.get<string>('DB_PASSWORD'),
       database: configService.get<string>('DB_NAME'),
-      entities: [User, Quiz, UserQuiz, QuizQuestion],
+      entities: [User, Quiz, UserQuiz, QuizQuestion, QuizAnswer, QuizUserAnswer, History],
       synchronize: true,
     }),
     inject: [ConfigService],
-  }), UsersModule, FilesModule, AuthModule, QuizzesModule, UserQuizModule, QuizQuestionModule],
+  }), UsersModule, FilesModule, AuthModule, QuizzesModule, UserQuizModule, QuizQuestionModule, QuizAnswerModule, QuizUserAnswerModule, HistoryModule],
   controllers: [AppController],
   providers: [AppService,],
 })

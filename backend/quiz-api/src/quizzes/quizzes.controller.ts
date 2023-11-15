@@ -3,14 +3,14 @@ import { QuizzesService } from './quizzes.service';
 import { CreateQuizDto } from './dto/create-quiz.dto';
 import { UpdateQuizDto } from './dto/update-quiz.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { Public } from 'src/decorator/customize';
+import { Public, ResponseMessage } from 'src/decorator/customize';
 
 @Controller('quizzes')
 export class QuizzesController {
   constructor(private readonly quizzesService: QuizzesService) { }
 
   @Post()
-  @Public()
+  @ResponseMessage("Create Quizz Success")
   @UseInterceptors(FileInterceptor('quizImage'))
   create(@UploadedFile(
     new ParseFilePipeBuilder()
@@ -55,5 +55,11 @@ export class QuizzesController {
   @Public()
   remove(@Param('id') id: string) {
     return this.quizzesService.remove(+id);
+  }
+
+  @Get('quiz-with-qa/:id')
+  @Public()
+  getQuizWithQA(@Param('id') id: string) {
+    return this.quizzesService.getQuizWithQA(+id);
   }
 }

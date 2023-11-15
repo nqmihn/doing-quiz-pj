@@ -1,4 +1,5 @@
 import { QuizQuestion } from 'src/quiz-question/entities/quiz-question.entity';
+import { QuizUserAnswer } from 'src/quiz-user-answer/entities/quiz-user-answer.entity';
 import { UserQuiz } from 'src/user-quiz/entities/user-quiz.entity';
 import { User } from 'src/users/entities/user.entity';
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, ManyToMany, JoinTable, OneToMany } from 'typeorm';
@@ -34,6 +35,9 @@ export class Quiz {
 
     @OneToMany(() => QuizQuestion, (QuizQuestion) => QuizQuestion.quiz)
     quizQuestions: QuizQuestion[]
+
+    @OneToMany(() => QuizUserAnswer, (quizUserAnswer) => quizUserAnswer.quiz)
+    quizUserAnswers: QuizUserAnswer[]
 
 
 

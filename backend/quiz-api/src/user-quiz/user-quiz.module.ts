@@ -8,10 +8,12 @@ import { UsersService } from 'src/users/users.service';
 import { User } from 'src/users/entities/user.entity';
 import { QuizzesService } from 'src/quizzes/quizzes.service';
 import { Quiz } from 'src/quizzes/entities/quiz.entity';
+import { QuizQuestionModule } from 'src/quiz-question/quiz-question.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UserQuiz, User, Quiz]),],
+  imports: [TypeOrmModule.forFeature([UserQuiz,]),],
   controllers: [UserQuizController],
-  providers: [UserQuizService, UsersService, QuizzesService]
+  providers: [UserQuizService, ],
+  exports: [UserQuizService],
 })
 export class UserQuizModule { }

@@ -1,3 +1,4 @@
+import { QuizUserAnswer } from 'src/quiz-user-answer/entities/quiz-user-answer.entity';
 import { UserQuiz } from 'src/user-quiz/entities/user-quiz.entity';
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, OneToMany } from 'typeorm';
 
@@ -35,4 +36,7 @@ export class User {
 
     @OneToMany(() => UserQuiz, (userQuiz) => userQuiz.user)
     userQuizzes: UserQuiz[]
+
+    @OneToMany(() => QuizUserAnswer, (quizUserAnswer) => quizUserAnswer.user)
+    quizUserAnswers: QuizUserAnswer[]
 }
