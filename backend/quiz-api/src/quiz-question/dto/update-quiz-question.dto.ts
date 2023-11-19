@@ -12,3 +12,15 @@ export class UpdateQuizQuestionDto {
     @IsNotEmpty({ message: "Invalid description" })
     description: string;
 }
+
+
+export class UpsertQuizQuestionDto {
+
+    quizId: number;
+
+    id: number;
+
+
+    @IsNotEmpty({ message: "Invalid description" })
+    description: string;
+}

@@ -21,12 +21,16 @@ export class UsersService {
   }
   async create(createUserDto: CreateUserDto, image: string) {
     const { email, password, username, role } = createUserDto
+    const isExsitUser = await this.usersRepository.findOneBy({ email });
+    if (isExsitUser) {
+      throw new BadRequestException("Email has been used");
+    }
     const newUser = this.usersRepository.create({
       email,
       password: this.getHashPassword(password),
       username,
       role,
-      image
+      image: 'users/' + image
     });
     const data = await this.usersRepository.save(newUser);
     return {
@@ -68,7 +72,7 @@ export class UsersService {
 
   async update(updateUserDto: UpdateUserDto, image: string) {
     const { id, username, role } = updateUserDto
-    return await this.usersRepository.update({ id }, { username, role, image })
+    return await this.usersRepository.update({ id }, { username, role, image: image ? 'users/' + image : null })
   }
   setRefreshToken(id: number, refresh_token: string) {
 
@@ -82,6 +86,10 @@ export class UsersService {
   }
   register = async (registerUserDto: RegisterUserDto) => {
     const { email, password, username } = registerUserDto
+    const isExistEmail = await this.usersRepository.findOneBy({ email })
+    if (isExistEmail) {
+      throw new BadRequestException("Email has been used")
+    }
     const newUser = this.usersRepository.create({
       email,
       password: this.getHashPassword(password),

@@ -27,7 +27,8 @@ export class QuizzesController {
     return this.quizzesService.create(createQuizDto, quizImage.filename);
   }
 
-  @Get()
+  @Get('all')
+  @ResponseMessage("Get all quiz")
   findAll() {
     return this.quizzesService.findAll();
   }
@@ -39,7 +40,7 @@ export class QuizzesController {
   }
 
   @Put()
-  @Public()
+  @ResponseMessage("Update Quizz Success")
   @UseInterceptors(FileInterceptor('quizImage'))
   update(@UploadedFile(new ParseFilePipe({
     fileIsRequired: false,
@@ -52,7 +53,7 @@ export class QuizzesController {
   }
 
   @Delete(':id')
-  @Public()
+  @ResponseMessage("Delete Quiz Success")
   remove(@Param('id') id: string) {
     return this.quizzesService.remove(+id);
   }

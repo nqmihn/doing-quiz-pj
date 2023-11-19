@@ -1,9 +1,10 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, ParseFilePipe, MaxFileSizeValidator, FileTypeValidator, Put, Query } from '@nestjs/common';
 import { QuizQuestionService } from './quiz-question.service';
 import { CreateQuizQuestionDto } from './dto/create-quiz-question.dto';
-import { UpdateQuizQuestionDto } from './dto/update-quiz-question.dto';
-import { Public } from 'src/decorator/customize';
+import { UpdateQuizQuestionDto, UpsertQuizQuestionDto } from './dto/update-quiz-question.dto';
+import { Public, ResponseMessage } from 'src/decorator/customize';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { IQuestionAnswer } from './questionAnswer.interface';
 
 @Controller('question')
 export class QuizQuestionController {
@@ -50,5 +51,24 @@ export class QuizQuestionController {
   @Delete()
   remove(@Body('id') id: string) {
     return this.quizQuestionService.remove(+id);
+  }
+
+  @Post('upsert-qa')
+  @ResponseMessage("Update Q/A Success")
+  upsertQA(@Body() qa: IQuestionAnswer) {
+
+    return this.quizQuestionService.upsert(qa)
+  }
+
+  @Post('update-file-qa')
+  @UseInterceptors(FileInterceptor('image'))
+  updateFile(@UploadedFile(new ParseFilePipe({
+    fileIsRequired: false,
+    validators: [
+      new MaxFileSizeValidator({ maxSize: 5000 * 1024 }),
+      new FileTypeValidator({ fileType: /^(image\/png|image\/jpeg|jpg|jpeg|png|gif)$/i }),
+    ],
+  }),) image: Express.Multer.File) {
+    return `questions/${image?.filename}`;
   }
 }

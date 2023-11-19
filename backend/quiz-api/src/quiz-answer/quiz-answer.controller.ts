@@ -1,9 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, BadRequestException, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, BadRequestException, Put, UseInterceptors, UploadedFiles, ParseFilePipe, MaxFileSizeValidator, FileTypeValidator } from '@nestjs/common';
 import { QuizAnswerService } from './quiz-answer.service';
 import { CreateQuizAnswerDto } from './dto/create-quiz-answer.dto';
 import { UpdateQuizAnswerDto } from './dto/update-quiz-answer.dto';
-import { Public } from 'src/decorator/customize';
+import { Public, ResponseMessage } from 'src/decorator/customize';
 import { QuizQuestionService } from 'src/quiz-question/quiz-question.service';
+import { FilesInterceptor } from '@nestjs/platform-express';
+import { Multer } from 'multer';
+import { IUserAnswer } from 'src/users/userAnswer.interface';
+import { quizResult } from './entities/answer.interface';
 
 @Controller('answer')
 export class QuizAnswerController {
@@ -35,5 +39,11 @@ export class QuizAnswerController {
   @Public()
   remove(@Param('id') id: string) {
     return this.quizAnswerService.remove(+id);
+  }
+
+  @Post('quiz-submit')
+  @ResponseMessage("Submit Quiz Success")
+  submitAnswer(@Body() userAnswer: IUserAnswer): Promise<quizResult> {
+    return this.quizAnswerService.submit(userAnswer);
   }
 }

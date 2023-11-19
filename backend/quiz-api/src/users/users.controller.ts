@@ -3,13 +3,14 @@ import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { Public } from 'src/decorator/customize';
+import { Public, ResponseMessage } from 'src/decorator/customize';
 
 @Controller('users')
 export class UsersController {
   constructor(private readonly usersService: UsersService) { }
 
   @Post()
+  @ResponseMessage("Create User Success")
   @UseInterceptors(FileInterceptor('image'))
   create(@UploadedFile(
     new ParseFilePipeBuilder()
@@ -47,6 +48,7 @@ export class UsersController {
   }
 
   @Put()
+  @ResponseMessage("Update User Success")
   @UseInterceptors(FileInterceptor('image'))
   update(
     @UploadedFile(new ParseFilePipe({
@@ -61,6 +63,7 @@ export class UsersController {
   }
 
   @Delete()
+  @ResponseMessage("Delete User Success")
   remove(
     @Body('id') id: string
   ) {

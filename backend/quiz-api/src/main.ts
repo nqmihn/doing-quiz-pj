@@ -5,7 +5,7 @@ import { join } from 'path';
 import { ConfigService } from '@nestjs/config';
 import { ValidationPipe, VersioningType } from '@nestjs/common';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
-import cookieParser = require('cookie-parser');
+import cookieParser from 'cookie-parser';
 import { TransformInterceptor } from './core/transform.interceptor';
 
 async function bootstrap() {
@@ -20,6 +20,12 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe())
   app.use(cookieParser())
   app.useGlobalInterceptors(new TransformInterceptor(reflector))
+  // cors
+  app.enableCors({
+    "origin": "*",
+    "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+    "preflightContinue": false,
+  })
   app.enableVersioning({
     type: VersioningType.URI,
     prefix: 'api/v',

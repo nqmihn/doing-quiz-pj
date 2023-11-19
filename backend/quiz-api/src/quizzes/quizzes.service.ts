@@ -15,13 +15,13 @@ export class QuizzesService {
 
   ) { }
   async create(createQuizDto: CreateQuizDto, quizImage: string) {
-    const newQuiz = this.quizRepository.create({ ...createQuizDto, quizImage });
+    const newQuiz = this.quizRepository.create({ ...createQuizDto, quizImage: 'quizzes/' + quizImage });
     const data = await this.quizRepository.save(newQuiz)
     return data;
   }
 
   findAll() {
-    return `This action returns all quizzes`;
+    return this.quizRepository.find();
   }
 
   async findOne(id: number) {
@@ -30,7 +30,7 @@ export class QuizzesService {
 
   async update(updateQuizDto: UpdateQuizDto, quizImage: string) {
     const { id, name, description, difficulty } = updateQuizDto
-    return await this.quizRepository.update({ id }, { name, description, difficulty, quizImage })
+    return await this.quizRepository.update({ id }, { name, description, difficulty, quizImage: quizImage ? 'quizzes/' + quizImage : null })
   }
 
   async remove(id: number) {
