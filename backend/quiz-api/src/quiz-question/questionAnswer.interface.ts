@@ -3,7 +3,7 @@ export interface IQuestionAnswer {
     questions?: {
         id?: number;
         description?: string;
-        image?:string;
+        image?: string;
         quizAnswers: {
             id?: number;
             description?: string;

@@ -1,6 +1,25 @@
 {
   "homepage": {
     "title1": "Có rất nhiều điều để hỏi",
-    "title2": " Bạn không muốn tạo một biểu mẫu nhàm chán. Thay vào đó, hãy tạo một biểu mẫu kiểu và làm cho mọi người hạnh phúc"
+    "title2": " Bạn không muốn tạo một biểu mẫu nhàm chán. Thay vào đó, hãy tạo một biểu mẫu kiểu và làm cho mọi người hạnh phúc",
+    "start1": "Làm trắc nghiệm",
+    "start2": "Tạo tài khoản miễn phí"
+  },
+  "header": {
+    "home": "Trang Chủ",
+    "quiz": "Trắc Nghiệm",
+    "admin": "Quản Lý",
+    "signin": "Đăng Nhập",
+    "signup": "Đăng Ký",
+    "logout": "Đăng xuất",
+    "profile": "Hồ sơ của bạn"
+  },
+  "auth": {
+    "title": "Chưa có tài khoản?",
+    "signup": "Đăng Ký",
+    "password": "Mật Khẩu",
+    "forgot": "Quên Mật Khẩu",
+    "login": "Đăng Nhập",
+    "homepage": "Trở về Trang Chủ"
   }
 }

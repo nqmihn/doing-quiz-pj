@@ -8,12 +8,13 @@ import { logout } from "../..//services/apiServices";
 import { toast } from "react-toastify";
 import { doLogout } from "../../redux/action/userAction";
 import Language from "./Language";
-
+import { useTranslation, Trans } from "react-i18next";
 const Header = () => {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const account = useSelector((state) => state.user.account);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const handleLogin = () => {
     navigate("/login");
   };
@@ -41,31 +42,31 @@ const Header = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <NavLink to="/" className="nav-link">
-              Home
+              {t("header.home")}
             </NavLink>
             <NavLink to="/users" className="nav-link">
-              User
+              {t("header.quiz")}
             </NavLink>
             <NavLink to="/admins" className="nav-link">
-              Admin
+              {t("header.admin")}
             </NavLink>
           </Nav>
           <Nav>
             {isAuthenticated === false ? (
               <>
                 <button className="btn-login" onClick={() => handleLogin()}>
-                  Sign in
+                  {t("header.signin")}
                 </button>
                 <button className="btn-signup" onClick={() => handleResgier()}>
-                  Sign up
+                  {t("header.signup")}
                 </button>
               </>
             ) : (
               <NavDropdown title="Settings" id="basic-nav-dropdown">
                 <NavDropdown.Item onClick={() => handleLogout()}>
-                  Log out
+                  {t("header.logout")}
                 </NavDropdown.Item>
-                <NavDropdown.Item>Profile</NavDropdown.Item>
+                <NavDropdown.Item>{t("header.profile")}</NavDropdown.Item>
               </NavDropdown>
             )}
             <Language />

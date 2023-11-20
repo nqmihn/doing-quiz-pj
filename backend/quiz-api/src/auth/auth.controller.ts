@@ -6,9 +6,13 @@ import { Response, Request } from 'express';
 import { IUser } from 'src/users/user.interface';
 import { RegisterUserDto } from 'src/users/dto/create-user.dto';
 import { UsersService } from 'src/users/users.service';
+import { QuizzesService } from 'src/quizzes/quizzes.service';
+import { QuizQuestionService } from 'src/quiz-question/quiz-question.service';
+import { QuizAnswerService } from 'src/quiz-answer/quiz-answer.service';
 @Controller('auth')
 export class AuthController {
-    constructor(private authService: AuthService, private userService: UsersService) { }
+    constructor(private authService: AuthService, private userService: UsersService, private quizService: QuizzesService, private quizQuestionService: QuizQuestionService,
+        private quizAnswerService: QuizAnswerService) { }
 
 
     @UseGuards(LocalAuthGuard)
@@ -44,5 +48,19 @@ export class AuthController {
     @Post('change-password')
     changePassword(@User() user: IUser, @Body('current_password') currentPassword: string, @Body('new_password') newPassword: string) {
         return this.userService.changePassword(user, currentPassword, newPassword);
+    }
+
+    @Get('overview')
+    @Public()
+    async getOverview() {
+        const users = await this.userService.countUser()
+        const countQuiz = await this.quizService.countQuizzes()
+        const countQuestions = await this.quizQuestionService.countQuestions()
+        const countAnswers = await this.quizAnswerService.countAnswers()
+        return {
+            users, others: {
+                countQuiz, countQuestions, countAnswers
+            }
+        }
     }
 }   

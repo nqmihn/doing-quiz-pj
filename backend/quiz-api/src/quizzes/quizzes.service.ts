@@ -49,4 +49,7 @@ export class QuizzesService {
     return { quizId: quiz[0].id, qa }
 
   }
+  async countQuizzes() {
+    return await this.quizRepository.count();
+  }
 }

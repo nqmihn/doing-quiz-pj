@@ -8,9 +8,12 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { JwtStrategy } from './local/jwt.strategy';
 import ms from 'ms';
 import { AuthController } from './auth.controller';
+import { QuizzesModule } from 'src/quizzes/quizzes.module';
+import { QuizQuestionModule } from 'src/quiz-question/quiz-question.module';
+import { QuizAnswerModule } from 'src/quiz-answer/quiz-answer.module';
 
 @Module({
-  imports: [UsersModule, PassportModule, JwtModule.registerAsync({
+  imports: [UsersModule, QuizzesModule, QuizQuestionModule, QuizAnswerModule, PassportModule, JwtModule.registerAsync({
     imports: [ConfigModule],
     useFactory: async (configService: ConfigService) => ({
       secret: configService.get<string>('JWT_ACCESS_SECRET'),

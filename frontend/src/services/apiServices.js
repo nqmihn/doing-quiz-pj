@@ -144,7 +144,7 @@ const logout = () => {
   return axios.post("/api/v1/auth/logout");
 };
 const getOverview = () => {
-  return axios.get("/api/v1/overview");
+  return axios.get("/api/v1/auth/overview");
 };
 export {
   postCreateUser,

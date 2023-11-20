@@ -16,10 +16,12 @@ const HomeComponent = () => {
         <div className="title-2">{t("homepage.title2")}</div>
         <div className="title-3">
           {isAuthenticated ? (
-            <button onClick={() => navigate("/users")}>Doing Quiz</button>
+            <button onClick={() => navigate("/users")}>
+              {t("homepage.start1")}
+            </button>
           ) : (
             <button onClick={() => navigate("/login")}>
-              Get's started. It's free
+              {t("homepage.start2")}
             </button>
           )}
         </div>

@@ -13,6 +13,7 @@ import { MulterConfigService } from 'src/files/multer.config';
     useClass: MulterConfigService,
   }),],
   controllers: [QuizAnswerController],
-  providers: [QuizAnswerService]
+  providers: [QuizAnswerService],
+  exports: [QuizAnswerService]
 })
 export class QuizAnswerModule { }

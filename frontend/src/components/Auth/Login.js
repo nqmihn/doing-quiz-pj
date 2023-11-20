@@ -7,11 +7,13 @@ import { useDispatch } from "react-redux";
 import { doLogin } from "../../redux/action/userAction";
 import { ImSpinner9 } from "react-icons/im";
 import Language from "../Header/Language";
+import { useTranslation, Trans } from "react-i18next";
 const LoginComponent = (props) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const validateEmail = (email) => {
     return String(email)
@@ -52,13 +54,13 @@ const LoginComponent = (props) => {
   return (
     <div className="login-container">
       <div className="header">
-        <span>Don't have an account yet?</span>
+        <span>{t("auth.title")}</span>
         <button
           onClick={() => {
             navigate("/register");
           }}
         >
-          Sign Up
+          {t("auth.signup")}
         </button>
         <Language />
       </div>
@@ -75,7 +77,7 @@ const LoginComponent = (props) => {
           />
         </div>
         <div className="form-group">
-          <label>Password</label>
+          <label>{t("auth.password")}</label>
           <input
             type={"password"}
             className="form-control"
@@ -84,7 +86,7 @@ const LoginComponent = (props) => {
             onKeyDown={(event) => handleKeyDown(event)}
           />
         </div>
-        <span className="forgot-password">Forgot Password</span>
+        <span className="forgot-password">{t("auth.forgot")}</span>
         <div>
           <button
             className="btn-submit"
@@ -93,7 +95,7 @@ const LoginComponent = (props) => {
           >
             {isLoading && <ImSpinner9 className="loader-icon" />}
 
-            <span>Login</span>
+            <span>{t("auth.login")}</span>
           </button>
         </div>
         <div className="text-center">
@@ -104,7 +106,7 @@ const LoginComponent = (props) => {
             className="back"
           >
             {" "}
-            &#60;&#60;Go to Homepage
+            &#60;&#60;{t("auth.homepage")}
           </span>
         </div>
       </div>

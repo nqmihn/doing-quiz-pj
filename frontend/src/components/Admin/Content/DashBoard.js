@@ -19,14 +19,14 @@ const DashBoard = (props) => {
   }, []);
   const fetchDataDashboard = async () => {
     let res = await getOverview();
-    if (res && res.EC === 0) {
-      setDataOverview(res.DT);
+    if (res && res.statusCode === 0) {
+      setDataOverview(res.data);
       let Qz = 0,
         Qs = 0,
         As = 0;
-      Qz = res?.DT?.others?.countQuiz ?? 0;
-      Qs = res?.DT?.others?.countQuestions ?? 0;
-      As = res?.DT?.others?.countAnswers ?? 0;
+      Qz = res?.data?.others?.countQuiz ?? 0;
+      Qs = res?.data?.others?.countQuestions ?? 0;
+      As = res?.data?.others?.countAnswers ?? 0;
       const data = [
         {
           name: "Quizzes",

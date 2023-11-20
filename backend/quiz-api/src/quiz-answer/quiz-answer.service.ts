@@ -92,4 +92,7 @@ export class QuizAnswerService {
     result.countTotal = totalPoint;
     return result
   }
+  async countAnswers() {
+    return await this.quizAnswerRepository.count();
+  }
 }

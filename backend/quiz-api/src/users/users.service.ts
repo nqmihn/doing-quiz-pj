@@ -117,4 +117,23 @@ export class UsersService {
       throw new BadRequestException("Current Password is wrong !")
     }
   }
+  countUser = async () => {
+    const total = await this.usersRepository.count()
+    const countUser = await this.usersRepository.count({
+      where: {
+        role: "USER"
+      }
+    })
+    const countAdmin = await this.usersRepository.count({
+      where: {
+        role: "ADMIN"
+      }
+    })
+    return {
+      total,
+      countUser,
+      countAdmin,
+
+    }
+  }
 }

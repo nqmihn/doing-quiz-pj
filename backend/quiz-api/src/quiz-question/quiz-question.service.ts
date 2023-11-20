@@ -114,9 +114,8 @@ export class QuizQuestionService {
       }
     }))
     return "ok";
-
-
-  
-
+  }
+  async countQuestions() {
+    return await this.quizQuestionRepository.count();
   }
 }

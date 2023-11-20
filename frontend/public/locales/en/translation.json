@@ -1,6 +1,25 @@
 {
   "homepage": {
     "title1": "There's a way to ask",
-    "title2": " You don't want to make a boring form.Create a type form instead-andmake everyone happy"
+    "title2": " You don't want to make a boring form.Create a type form instead-andmake everyone happy",
+    "start1": "Doing Quiz",
+    "start2": "Get's started. It's free"
+  },
+  "header": {
+    "home": "Home",
+    "quiz": "Quiz",
+    "admin": "Admin",
+    "signin": "Sign in",
+    "signup": "Sign up",
+    "logout": "Logout",
+    "profile": "Profile"
+  },
+  "auth": {
+    "title": "Don't have an account yet?",
+    "signup": "Sign Up",
+    "password": "Password",
+    "forgot": "Forgot Password",
+    "login": "Login",
+    "homepage": "Go to Homepage"
   }
 }
