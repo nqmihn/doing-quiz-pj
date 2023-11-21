@@ -12,7 +12,8 @@
     "signin": "Sign in",
     "signup": "Sign up",
     "logout": "Logout",
-    "profile": "Profile"
+    "profile": "Profile",
+    "settings": "Settings"
   },
   "auth": {
     "title": "Don't have an account yet?",
@@ -21,5 +22,8 @@
     "forgot": "Forgot Password",
     "login": "Login",
     "homepage": "Go to Homepage"
+  },
+  "quiz": {
+    "doing": "Doing Quiz"
   }
 }

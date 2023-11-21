@@ -4,10 +4,11 @@ import { getQuizByUser } from "../../services/apiServices";
 import { useNavigate } from "react-router-dom";
 import "./ListQuiz.scss";
 import HOST_IMAGE_URL from "../../constants";
-
+import { useTranslation, Trans } from "react-i18next";
 const ListQuiz = (props) => {
   const navigate = useNavigate();
   const [arrQuiz, setArrQuiz] = useState([]);
+  const { t } = useTranslation();
   useEffect(() => {
     getQuizData();
   }, []);
@@ -44,7 +45,7 @@ const ListQuiz = (props) => {
                     })
                   }
                 >
-                  Làm bài
+                  {t("quiz.doing")}
                 </button>
               </div>
             </div>

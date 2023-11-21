@@ -63,8 +63,10 @@ export class AuthService {
             let isRefreshToken = this.jwtService.verify(refreshToken, {
                 secret: this.configService.get<string>("JWT_REFRESH_SECRET")
             })
+
             let user = await this.usersService.findByToken(refreshToken)
             if (user) {
+
                 const { id, email, username, role, image } = user
                 const payload = {
                     sub: "token login",
@@ -103,5 +105,5 @@ export class AuthService {
         response.clearCookie("refresh_token");
         return "logout successsssss"
     }
-    
+
 }

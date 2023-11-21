@@ -2,4 +2,11 @@
   display: flex;
   gap: 50px;
   flex-wrap: wrap;
+  margin-bottom: 20px;
+  .card {
+    height: 30rem;
+    .card-img-top {
+      height: 70%;
+    }
+  }
 }

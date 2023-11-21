@@ -62,7 +62,7 @@ const Header = () => {
                 </button>
               </>
             ) : (
-              <NavDropdown title="Settings" id="basic-nav-dropdown">
+              <NavDropdown title={t("header.settings")} id="basic-nav-dropdown">
                 <NavDropdown.Item onClick={() => handleLogout()}>
                   {t("header.logout")}
                 </NavDropdown.Item>

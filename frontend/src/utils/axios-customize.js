@@ -1,7 +1,8 @@
 import axios from "axios";
 import NProgress from "nprogress";
 import { store } from "../redux/store";
-
+import Cookies from "js-cookie";
+import { setAccessToken } from "../redux/action/userAction";
 NProgress.configure({
   showSpinner: false,
   trickleSpeed: 100,
@@ -9,7 +10,14 @@ NProgress.configure({
 
 const instance = axios.create({
   baseURL: "http://localhost:8000/",
+  withCredentials: true,
 });
+const handleRefreshToken = async () => {
+  const res = await instance.post("/api/v1/auth/refresh");
+  if (res && res.data) {
+    return res.data.access_token;
+  } else return null;
+};
 // Add a request interceptor
 instance.interceptors.request.use(
   function (config) {
@@ -25,7 +33,7 @@ instance.interceptors.request.use(
     return Promise.reject(error);
   }
 );
-
+const NO_RETRY_HEADER = "x-no-retry";
 // Add a response interceptor
 instance.interceptors.response.use(
   function (response) {
@@ -36,7 +44,27 @@ instance.interceptors.response.use(
   },
   async function (error) {
     NProgress.done();
-    if (error.response.data && error.response.data.statusCode === 401) {
+    if (
+      error.response.data &&
+      error.response.data.statusCode === 401 &&
+      !error.config.headers[NO_RETRY_HEADER]
+    ) {
+      // window.location.href = "/login";
+      const access_token = await handleRefreshToken();
+      error.config.headers[NO_RETRY_HEADER] = "true";
+      if (access_token) {
+        store.dispatch(setAccessToken(access_token));
+        error.config.headers["Authorization"] = `Bearer ${access_token}`;
+        localStorage.setItem("access_token", access_token);
+        return axios.request(error.config);
+      }
+    }
+    if (
+      error.config &&
+      error.response &&
+      error.response.statusCode === 400 &&
+      error.config.url === "/api/v1/auth/refresh"
+    ) {
       window.location.href = "/login";
     }
     // Any status codes that falls outside the range of 2xx cause this function to trigger

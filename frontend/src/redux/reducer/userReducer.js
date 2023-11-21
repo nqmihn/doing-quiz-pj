@@ -1,4 +1,8 @@
-import { FETCH_USER_LOGIN, USER_LOGOUT_SUCCESS } from "../action/userAction";
+import {
+  FETCH_USER_LOGIN,
+  USER_LOGOUT_SUCCESS,
+  SET_ACCESS_TOKEN,
+} from "../action/userAction";
 const INITIAL_STATE = {
   account: {
     access_token: "",
@@ -40,6 +44,14 @@ const userReducer = (state = INITIAL_STATE, action) => {
           role: "",
         },
         isAuthenticated: false,
+      };
+    case SET_ACCESS_TOKEN:
+      return {
+        ...state,
+        account: {
+          access_token: action.payload,
+        },
+        isAuthenticated: true,
       };
     default:
       return state;

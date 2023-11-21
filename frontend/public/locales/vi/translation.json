@@ -12,7 +12,8 @@
     "signin": "Đăng Nhập",
     "signup": "Đăng Ký",
     "logout": "Đăng xuất",
-    "profile": "Hồ sơ của bạn"
+    "profile": "Hồ sơ của bạn",
+    "settings": "Cài đặt"
   },
   "auth": {
     "title": "Chưa có tài khoản?",
@@ -21,5 +22,8 @@
     "forgot": "Quên Mật Khẩu",
     "login": "Đăng Nhập",
     "homepage": "Trở về Trang Chủ"
+  },
+  "quiz": {
+    "doing": "Làm bài"
   }
 }
