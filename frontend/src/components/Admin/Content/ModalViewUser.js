@@ -107,7 +107,7 @@ const ModalViewUser = (props) => {
             </div>
             <div className="col-md-12 img-preview">
               {previewImage ? (
-                <img src={previewImage} />
+                <img src={previewImage} alt="previewImage"/>
               ) : (
                 <span>Preview Image</span>
               )}
@@ -117,9 +117,6 @@ const ModalViewUser = (props) => {
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save
           </Button>
         </Modal.Footer>
       </Modal>

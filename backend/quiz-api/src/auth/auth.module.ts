@@ -11,6 +11,8 @@ import { AuthController } from './auth.controller';
 import { QuizzesModule } from 'src/quizzes/quizzes.module';
 import { QuizQuestionModule } from 'src/quiz-question/quiz-question.module';
 import { QuizAnswerModule } from 'src/quiz-answer/quiz-answer.module';
+import { MulterModule } from '@nestjs/platform-express';
+import { MulterConfigService } from 'src/files/multer.config';
 
 @Module({
   imports: [UsersModule, QuizzesModule, QuizQuestionModule, QuizAnswerModule, PassportModule, JwtModule.registerAsync({
@@ -22,7 +24,9 @@ import { QuizAnswerModule } from 'src/quiz-answer/quiz-answer.module';
       },
     }),
     inject: [ConfigService],
-  }),],
+  }), MulterModule.registerAsync({
+    useClass: MulterConfigService,
+  })],
   providers: [AuthService, LocalStrategy, JwtStrategy],
   exports: [AuthService],
   controllers: [AuthController]

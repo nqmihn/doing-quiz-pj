@@ -52,7 +52,7 @@ const AssignQuiz = () => {
     }
   };
   return (
-    <div className="assign-quiz-container row">
+    <div className="assign-quiz-container row mx-1">
       <div className="col-6 form-group">
         <label className="mb-2">Select Quiz:</label>
         <Select

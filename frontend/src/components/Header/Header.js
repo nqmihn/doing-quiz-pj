@@ -32,6 +32,9 @@ const Header = () => {
       toast.error(res.message);
     }
   };
+  const handleProfile = () => {
+    navigate("/profile");
+  };
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
@@ -66,7 +69,9 @@ const Header = () => {
                 <NavDropdown.Item onClick={() => handleLogout()}>
                   {t("header.logout")}
                 </NavDropdown.Item>
-                <NavDropdown.Item>{t("header.profile")}</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => handleProfile()}>
+                  {t("header.profile")}
+                </NavDropdown.Item>
               </NavDropdown>
             )}
             <Language />

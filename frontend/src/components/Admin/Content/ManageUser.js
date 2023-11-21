@@ -60,7 +60,7 @@ const ManageUser = (props) => {
       <div className="user-content">
         <div>
           <button
-            className="btn btn-primary"
+            className="btn btn-primary my-3"
             onClick={() => setShowModal(true)}
           >
             <FcPlus /> Thêm người dùng

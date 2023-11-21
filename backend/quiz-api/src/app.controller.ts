@@ -12,8 +12,5 @@ export class AppController {
 
 
 
-  @Get('profile')
-  getProfile(@User() user: IUser) {
-    return user;
-  }
+  
 }

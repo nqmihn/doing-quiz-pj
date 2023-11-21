@@ -1,7 +1,6 @@
 import axios from "axios";
 import NProgress from "nprogress";
 import { store } from "../redux/store";
-import Cookies from "js-cookie";
 import { setAccessToken } from "../redux/action/userAction";
 NProgress.configure({
   showSpinner: false,

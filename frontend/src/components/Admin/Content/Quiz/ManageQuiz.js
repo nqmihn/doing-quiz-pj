@@ -4,9 +4,11 @@ import Select from "react-select";
 import { toast } from "react-toastify";
 import { postCreateNewQuiz } from "../../../../services/apiServices";
 import TableQuiz from "./TableQuiz";
-import Accordion from "react-bootstrap/Accordion";
+// import Accordion from "react-bootstrap/Accordion";
 import QuizQA from "./QuizQA";
 import AssignQuiz from "./AssignQuiz";
+import Tab from "react-bootstrap/Tab";
+import Tabs from "react-bootstrap/Tabs";
 const options = [
   { value: "EASY", label: "EASY" },
   { value: "MEDIUM", label: "MEDIUM" },
@@ -42,7 +44,7 @@ const ManageQuiz = (props) => {
   };
   return (
     <div className="quiz-container">
-      <Accordion defaultActiveKey="0">
+      {/* <Accordion defaultActiveKey="0">
         <Accordion.Item eventKey="0">
           <Accordion.Header>Manage Quiz</Accordion.Header>
           <Accordion.Body>
@@ -115,7 +117,74 @@ const ManageQuiz = (props) => {
             <AssignQuiz />
           </Accordion.Body>
         </Accordion.Item>
-      </Accordion>
+      </Accordion> */}
+      <Tabs
+        defaultActiveKey="manage-quiz"
+        id="uncontrolled-tab-example"
+        className="mb-3 mx-1"
+      >
+        <Tab eventKey="manage-quiz" title="Manage Quiz">
+          <div className="add-new">
+            <fieldset className="border rounded-3 p-3">
+              <legend className="float-none w-auto px-3">Add new Quiz:</legend>
+              <div className="form-floating mb-3">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Your quiz name"
+                  value={name}
+                  onChange={(event) => setName(event.target.value)}
+                />
+                <label>Name</label>
+              </div>
+              <div className="form-floating">
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Description..."
+                  onChange={(event) => setDescription(event.target.value)}
+                  value={description}
+                />
+                <label>Description</label>
+              </div>
+              <div className="my-3">
+                <label>Quiz Type:</label>
+                <Select
+                  defaultValue={type}
+                  options={options}
+                  placeholder="Quiz type..."
+                  onChange={setType}
+                />
+              </div>
+              <div className="more-actions form-group">
+                <label className="mb-1">Upload image</label>
+                <input
+                  type="file"
+                  className="form-control"
+                  onChange={(event) => handleChangeFile(event)}
+                />
+              </div>
+              <div className="mt-3">
+                <button
+                  className="btn btn-warning"
+                  onClick={() => handleSubmit()}
+                >
+                  Save
+                </button>
+              </div>
+            </fieldset>
+          </div>
+          <div className="list-detail">
+            <TableQuiz />
+          </div>
+        </Tab>
+        <Tab eventKey="update-qa" title="Update Question/Answer">
+          <QuizQA />
+        </Tab>
+        <Tab eventKey="assign" title="Assign Quiz To User">
+          <AssignQuiz />
+        </Tab>
+      </Tabs>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import axios from "../utils/axios-customize";
-// ok
+
 const postCreateUser = (email, password, username, role, image) => {
   const form = new FormData();
   form.append("email", email);
@@ -13,11 +13,11 @@ const postCreateUser = (email, password, username, role, image) => {
     },
   });
 };
-// ok
+
 const getAllUser = () => {
   return axios.get("api/v1/users/all");
 };
-// ok
+
 const putUpdateUser = (id, username, role, image) => {
   const form = new FormData();
   form.append("id", id);
@@ -30,15 +30,15 @@ const putUpdateUser = (id, username, role, image) => {
     },
   });
 };
-// ok
+
 const deleteUser = (userId) => {
   return axios.delete("api/v1/users", { data: { id: userId } });
 };
-// ok
+
 const getUserWithPaginate = (page, limit) => {
   return axios.get(`api/v1/users?page=${page}&limit=${limit}`);
 };
-// ok
+
 const postLogin = (email, password) => {
   return axios.post("/api/v1/auth/login", {
     username: email,
@@ -46,23 +46,23 @@ const postLogin = (email, password) => {
     delay: 1000,
   });
 };
-// ok
+
 const postRegister = (email, password, username) => {
   return axios.post("/api/v1/auth/register", { email, password, username });
 };
-// ok
+
 const getQuizByUser = () => {
   return axios.get("/api/v1/user-quiz/quiz-by-user");
 };
-// ok
+
 const getQuestionById = (id) => {
   return axios.get(`/api/v1/question/questions-by-quiz?quizId=${id}`);
 };
-// ok
+
 const postSubmitQuiz = (data) => {
   return axios.post(`/api/v1/answer/quiz-submit`, { ...data });
 };
-// ok
+
 const postCreateNewQuiz = (description, name, difficulty, quizImage) => {
   const form = new FormData();
   form.append("description", description);
@@ -75,15 +75,15 @@ const postCreateNewQuiz = (description, name, difficulty, quizImage) => {
     },
   });
 };
-// ok
+
 const getAllQuizForAdmin = () => {
   return axios.get(`/api/v1/quizzes/all`);
 };
-// ok
+
 const deleteQuizById = (id) => {
   return axios.delete(`api/v1/quizzes/${id}`);
 };
-// ok
+
 const updateQuizById = (id, description, name, difficulty, quizImage) => {
   const form = new FormData();
   form.append("id", id);
@@ -97,7 +97,7 @@ const updateQuizById = (id, description, name, difficulty, quizImage) => {
     },
   });
 };
-// ok
+
 const postCreateNewQuestion = (quizId, description, questionImage) => {
   const form = new FormData();
   form.append("quizId", quizId);
@@ -109,7 +109,7 @@ const postCreateNewQuestion = (quizId, description, questionImage) => {
     },
   });
 };
-// ok
+
 const postCreateNewAnswer = (description, correct_answer, question_id) => {
   return axios.post(`/api/v1/answer`, {
     description,
@@ -117,19 +117,19 @@ const postCreateNewAnswer = (description, correct_answer, question_id) => {
     questionId: question_id,
   });
 };
-// ok
+
 const postAssignQuiz = (quizId, userId) => {
   return axios.post("/api/v1/user-quiz/assign", { quizId, userId });
 };
-// ok
+
 const getQuizWithQA = (quizId) => {
   return axios.get(`/api/v1/quizzes/quiz-with-qa/${quizId}`);
 };
-// ok
+
 const postUpsertQA = (data) => {
   return axios.post(`/api/v1/question/upsert-qa`, { ...data });
 };
-// ok
+
 const postUpsertFileQa = (image) => {
   const form = new FormData();
   form.append("image", image);
@@ -139,12 +139,31 @@ const postUpsertFileQa = (image) => {
     },
   });
 };
-// ok
+
 const logout = () => {
   return axios.post("/api/v1/auth/logout");
 };
 const getOverview = () => {
   return axios.get("/api/v1/auth/overview");
+};
+const getUserInfo = () => {
+  return axios.get("/api/v1/auth/profile");
+};
+const changeProfile = (username, userImage) => {
+  const form = new FormData();
+  form.append("userImage", userImage);
+  form.append("username", username);
+  return axios.post("/api/v1/auth/profile", form, {
+    headers: {
+      folder_type: "users",
+    },
+  });
+};
+const changePassword = (current_password, new_password) => {
+  return axios.post(
+    "/api/v1/auth/change-password",
+    {current_password, new_password}
+  );
 };
 export {
   postCreateUser,
@@ -169,4 +188,7 @@ export {
   postUpsertFileQa,
   logout,
   getOverview,
+  getUserInfo,
+  changeProfile,
+  changePassword,
 };

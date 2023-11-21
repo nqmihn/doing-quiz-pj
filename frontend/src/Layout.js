@@ -15,6 +15,7 @@ import ManageQuiz from "./components/Admin/Content/Quiz/ManageQuiz";
 import Questions from "./components/Admin/Content/Question/Questions";
 import PrivateRoute from "./routes/PrivateRoute";
 import { Suspense } from "react";
+import UserProfile from "./components/User/Profile/UserProfile";
 const NotFound = () => {
   return (
     <div className="alert alert-danger container mt-3">
@@ -36,6 +37,7 @@ const Layout = (props) => {
               </PrivateRoute>
             }
           />
+          <Route path="/profile" element={<UserProfile />} />
         </Route>
         <Route path="/quiz/:id" element={<DetailQuiz />} />
         <Route

@@ -1,4 +1,4 @@
-import { Controller, Get, UseGuards, Post, Req, Res, Body } from '@nestjs/common';
+import { Controller, Get, UseGuards, Post, Req, Res, Body, UseInterceptors, UploadedFile, ParseFilePipe, MaxFileSizeValidator, FileTypeValidator } from '@nestjs/common';
 import { LocalAuthGuard } from './local-auth.guard';
 import { AuthService } from './auth.service';
 import { Public, ResponseMessage, User } from 'src/decorator/customize';
@@ -9,6 +9,7 @@ import { UsersService } from 'src/users/users.service';
 import { QuizzesService } from 'src/quizzes/quizzes.service';
 import { QuizQuestionService } from 'src/quiz-question/quiz-question.service';
 import { QuizAnswerService } from 'src/quiz-answer/quiz-answer.service';
+import { FileInterceptor } from '@nestjs/platform-express';
 @Controller('auth')
 export class AuthController {
     constructor(private authService: AuthService, private userService: UsersService, private quizService: QuizzesService, private quizQuestionService: QuizQuestionService,
@@ -63,4 +64,20 @@ export class AuthController {
             }
         }
     }
+    @Post("profile")
+    @UseInterceptors(FileInterceptor('userImage'))
+    updateProfile(@UploadedFile(new ParseFilePipe({
+        fileIsRequired: false,
+        validators: [
+            new MaxFileSizeValidator({ maxSize: 5000 * 1024 }),
+            new FileTypeValidator({ fileType: /^(image\/png|image\/jpeg|jpg|jpeg|png|gif)$/i }),
+        ],
+    }),) image: Express.Multer.File, @Body("username") username: string, @User() user: IUser) {
+        return this.userService.updateProfile(image?.filename, username, user)
+    }
+    @Get('profile')
+    getProfile(@User() user: IUser) {
+        return this.userService.findOne(user.id);
+    }
+
 }   

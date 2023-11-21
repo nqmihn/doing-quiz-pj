@@ -46,8 +46,16 @@ export class UsersService {
     return this.usersRepository.find({ select: ['id', 'username', 'email', 'role', 'image'] });
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(id: number) {
+    return await this.usersRepository.findOne({
+      where: { id }, select: {
+        id: true,
+        email: true,
+        username: true,
+        role: true,
+        image: true
+      }
+    });
   }
 
   async findByEmail(email: string) {
@@ -135,5 +143,8 @@ export class UsersService {
       countAdmin,
 
     }
+  }
+  updateProfile = async (image: string, username: string, user: IUser) => {
+    return await this.usersRepository.update({ id: user.id }, { image: image ? "users/" + image : undefined, username })
   }
 }
