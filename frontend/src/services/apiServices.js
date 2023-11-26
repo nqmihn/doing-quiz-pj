@@ -160,10 +160,23 @@ const changeProfile = (username, userImage) => {
   });
 };
 const changePassword = (current_password, new_password) => {
-  return axios.post(
-    "/api/v1/auth/change-password",
-    {current_password, new_password}
-  );
+  return axios.post("/api/v1/auth/change-password", {
+    current_password,
+    new_password,
+  });
+};
+const getHistory = () => {
+  return axios.post("/api/v1/history/by-user");
+};
+const forgotPassword = (email) => {
+  return axios.post("/api/v1/mail/forgot", { email });
+};
+const resetPassword = (userId, verificationCode, password) => {
+  return axios.post("/api/v1/reset-password", {
+    userId,
+    verificationCode,
+    password,
+  });
 };
 export {
   postCreateUser,
@@ -191,4 +204,7 @@ export {
   getUserInfo,
   changeProfile,
   changePassword,
+  getHistory,
+  forgotPassword,
+  resetPassword,
 };

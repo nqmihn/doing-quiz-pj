@@ -2,8 +2,10 @@ import _ from "lodash";
 import { useState } from "react";
 import Lightbox from "react-awesome-lightbox";
 import HOST_IMAGE_URL from "../../constants";
+import { useEffect } from "react";
+import { FaCheck } from "react-icons/fa";
 const Question = (props) => {
-  const { data, index, handleCheckbox } = props;
+  const { data, index, handleCheckbox, showAnswer } = props;
   const [showPreviewImage, setShowPreviewImage] = useState(false);
   if (_.isEmpty(data)) {
     return <></>;
@@ -46,10 +48,22 @@ const Question = (props) => {
                     type="checkbox"
                     checked={answer.isSelected}
                     onChange={(event) => onCheckBox(event, answer.id, data.id)}
+                    disabled={showAnswer}
                   />
                   <label className="form-check-label">
                     {answer.description}
                   </label>
+                  {showAnswer && answer && answer.isCorrect && (
+                    <span className="mx-1 text-success">
+                      <FaCheck />
+                    </span>
+                  )}
+                  {showAnswer &&
+                    answer &&
+                    answer.isSelected &&
+                    !answer.isCorrect && (
+                      <span className="mx-1 text-danger fw-bold">x</span>
+                    )}
                 </div>
               </div>
             );

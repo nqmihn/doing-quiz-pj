@@ -21,6 +21,7 @@
     justify-content: flex-end;
     gap: 10px;
     button {
+      color: black !important;
       padding: 3px 15px;
       margin-left: 15px;
       border-radius: 5px;
@@ -62,6 +63,12 @@
     }
     .back {
       cursor: pointer;
+    }
+    .forgot-password {
+      cursor: pointer;
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 }

@@ -82,6 +82,9 @@ export class UsersService {
     const { id, username, role } = updateUserDto
     return await this.usersRepository.update({ id }, { username, role, image: image ? 'users/' + image : null })
   }
+  async updatePassword(id: number, password: string) {
+    return await this.usersRepository.update({ id }, { password: this.getHashPassword(password) })
+  }
   setRefreshToken(id: number, refresh_token: string) {
 
     return this.usersRepository.update({ id }, { refresh_token })

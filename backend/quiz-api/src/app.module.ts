@@ -20,6 +20,9 @@ import { QuizUserAnswerModule } from './quiz-user-answer/quiz-user-answer.module
 import { QuizUserAnswer } from './quiz-user-answer/entities/quiz-user-answer.entity';
 import { HistoryModule } from './history/history.module';
 import { History } from './history/entities/history.entity';
+import { MailModule } from './mail/mail.module';
+import { ResetPasswordModule } from './reset-password/reset-password.module';
+import { ResetPassword } from './reset-password/entities/reset-password.entity';
 @Module({
   imports: [ConfigModule.forRoot({ isGlobal: true }), TypeOrmModule.forRootAsync({
     imports: [ConfigModule],
@@ -30,11 +33,11 @@ import { History } from './history/entities/history.entity';
       username: configService.get<string>('DB_USERNAME'),
       password: configService.get<string>('DB_PASSWORD'),
       database: configService.get<string>('DB_NAME'),
-      entities: [User, Quiz, UserQuiz, QuizQuestion, QuizAnswer, QuizUserAnswer, History],
+      entities: [User, Quiz, UserQuiz, QuizQuestion, QuizAnswer, QuizUserAnswer, History, ResetPassword],
       synchronize: true,
     }),
     inject: [ConfigService],
-  }), UsersModule, FilesModule, AuthModule, QuizzesModule, UserQuizModule, QuizQuestionModule, QuizAnswerModule, QuizUserAnswerModule, HistoryModule],
+  }), UsersModule, FilesModule, AuthModule, QuizzesModule, UserQuizModule, QuizQuestionModule, QuizAnswerModule, QuizUserAnswerModule, HistoryModule, MailModule, ResetPasswordModule],
   controllers: [AppController],
   providers: [AppService,],
 })

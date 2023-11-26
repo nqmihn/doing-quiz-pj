@@ -7,9 +7,11 @@ import { QuizQuestionModule } from 'src/quiz-question/quiz-question.module';
 import { QuizQuestion } from 'src/quiz-question/entities/quiz-question.entity';
 import { MulterModule } from '@nestjs/platform-express';
 import { MulterConfigService } from 'src/files/multer.config';
+import { HistoryModule } from 'src/history/history.module';
+import { History } from 'src/history/entities/history.entity';
 
 @Module({
-  imports: [QuizQuestionModule, TypeOrmModule.forFeature([QuizAnswer, QuizQuestion]), MulterModule.registerAsync({
+  imports: [QuizQuestionModule, HistoryModule, TypeOrmModule.forFeature([QuizAnswer, QuizQuestion, History]), MulterModule.registerAsync({
     useClass: MulterConfigService,
   }),],
   controllers: [QuizAnswerController],

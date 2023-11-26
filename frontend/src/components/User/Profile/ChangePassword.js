@@ -4,8 +4,11 @@ import { changePassword, logout } from "../../../services/apiServices";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { doLogout } from "../../../redux/action/userAction";
+import { useEffect } from "react";
+import { useTranslation, Trans } from "react-i18next";
 
 const ChangePassWord = () => {
+  const { t } = useTranslation();
   const [password, setPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmedPassword, setConfirmedPassword] = useState("");
@@ -43,7 +46,7 @@ const ChangePassWord = () => {
   return (
     <>
       <h2>Change Password</h2>
-      <div className="change-password">
+      <div className="change-password mx-2">
         <div className="form-floating mb-3">
           <input
             type="password"
@@ -51,7 +54,7 @@ const ChangePassWord = () => {
             value={password}
             onChange={(event) => setPassword(event.target.value)}
           />
-          <label>Current Password</label>
+          <label>{t("profile.current-pwd")}</label>
         </div>
         <div className="form-floating mb-3">
           <input
@@ -60,7 +63,7 @@ const ChangePassWord = () => {
             value={newPassword}
             onChange={(event) => setNewPassword(event.target.value)}
           />
-          <label>New Password</label>
+          <label>{t("profile.new-pwd")}</label>
         </div>
         <div className="form-floating mb-3">
           <input
@@ -69,13 +72,13 @@ const ChangePassWord = () => {
             value={confirmedPassword}
             onChange={(event) => setConfirmedPassword(event.target.value)}
           />
-          <label>Confirmed Password</label>
+          <label>{t("profile.confirmed-pwd")}</label>
         </div>
         <button
           className="btn btn-primary"
           onClick={() => handleChangePassword()}
         >
-          Save
+          {t("profile.save")}
         </button>
       </div>
     </>

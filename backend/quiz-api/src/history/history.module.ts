@@ -7,6 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 @Module({
   imports: [TypeOrmModule.forFeature([History]),],
   controllers: [HistoryController],
-  providers: [HistoryService]
+  providers: [HistoryService],
+  exports: [HistoryService],
 })
 export class HistoryModule { }

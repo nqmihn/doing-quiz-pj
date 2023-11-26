@@ -25,5 +25,20 @@
   },
   "quiz": {
     "doing": "Làm bài"
+  },
+  "profile": {
+    "info": "Thông tin người dùng",
+    "change-pwd": "Đổi mật khẩu",
+    "history": "Lịch sử bài thi",
+    "save": "Lưu",
+    "current-pwd": "Mật khẩu hiện tại",
+    "new-pwd": "Mật khẩu mới",
+    "confirmed-pwd": "Xác nhận mật khẩu",
+    "table-history": {
+      "q-description": "Bài thi",
+      "t-question": "Tổng số câu",
+      "t-correct": "Tổng số câu đúng",
+      "time": "Thời gian"
+    }
   }
 }

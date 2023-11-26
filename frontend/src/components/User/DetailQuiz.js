@@ -13,6 +13,7 @@ const DetailQuiz = (pros) => {
   const [index, setIndex] = useState(0);
   const [showResult, setShowResult] = useState(false);
   const [dataResult, setDataResult] = useState({});
+  const [showAnswer, setShowAnswer] = useState(false);
   const quizId = params.id;
   useEffect(() => {
     fetchQuestion();
@@ -69,6 +70,25 @@ const DetailQuiz = (pros) => {
       });
       payload.answers = arrAnswers;
       const res = await postSubmitQuiz(payload);
+      let answerSystem = res.data.quizData;
+      let cloneQuizSubmit = _.cloneDeep(dataQuiz);
+      cloneQuizSubmit.forEach((question) => {
+        let index = answerSystem.findIndex(
+          (item) => item.questionId === question.id
+        );
+        if (index > -1) {
+          question.quizAnswers.forEach((answer) => {
+            let isCorrect;
+            isCorrect = answerSystem[index].systemAnswers.find(
+              (aS) => aS.id === answer.id
+            );
+            if (isCorrect) {
+              answer.isCorrect = true;
+            }
+          });
+        }
+      });
+      setDataQuiz(cloneQuizSubmit);
       if (res && res.statusCode === 0) {
         setShowResult(true);
         setDataResult({
@@ -79,6 +99,9 @@ const DetailQuiz = (pros) => {
       } else {
       }
     }
+  };
+  const handleShowAnswer = () => {
+    setShowAnswer(true);
   };
   return (
     <div className="detail-quiz-container">
@@ -94,6 +117,7 @@ const DetailQuiz = (pros) => {
           <Question
             handleCheckbox={handleCheckbox}
             index={index}
+            showAnswer={showAnswer}
             data={dataQuiz && dataQuiz.length > 0 ? dataQuiz[index] : []}
           />
         </div>
@@ -107,6 +131,7 @@ const DetailQuiz = (pros) => {
           <button
             className="btn btn-warning"
             onClick={() => handleSubmitQuiz()}
+            disabled={showAnswer}
           >
             Submit
           </button>
@@ -123,6 +148,8 @@ const DetailQuiz = (pros) => {
         show={showResult}
         setShow={setShowResult}
         dataResult={dataResult}
+        handleShowAnswer={handleShowAnswer}
+        setIndex={setIndex}
       />
     </div>
   );

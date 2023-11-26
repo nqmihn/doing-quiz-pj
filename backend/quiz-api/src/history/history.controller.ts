@@ -2,6 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { HistoryService } from './history.service';
 import { CreateHistoryDto } from './dto/create-history.dto';
 import { UpdateHistoryDto } from './dto/update-history.dto';
+import { User } from 'src/decorator/customize';
+import { IUser } from 'src/users/user.interface';
 
 @Controller('history')
 export class HistoryController {
@@ -30,5 +32,9 @@ export class HistoryController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.historyService.remove(+id);
+  }
+  @Post('by-user')
+  getHistoryByUser(@User() user:IUser){
+    return this.historyService.getByUser(user);
   }
 }

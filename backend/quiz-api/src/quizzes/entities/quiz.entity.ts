@@ -1,3 +1,4 @@
+import { History } from 'src/history/entities/history.entity';
 import { QuizQuestion } from 'src/quiz-question/entities/quiz-question.entity';
 import { QuizUserAnswer } from 'src/quiz-user-answer/entities/quiz-user-answer.entity';
 import { UserQuiz } from 'src/user-quiz/entities/user-quiz.entity';
@@ -38,6 +39,9 @@ export class Quiz {
 
     @OneToMany(() => QuizUserAnswer, (quizUserAnswer) => quizUserAnswer.quiz)
     quizUserAnswers: QuizUserAnswer[]
+
+    @OneToMany(() => History, (history) => history.quiz)
+    histories: History[]
 
 
 

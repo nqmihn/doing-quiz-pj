@@ -1,4 +1,6 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Quiz } from "src/quizzes/entities/quiz.entity";
+import { User } from "src/users/entities/user.entity";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 @Entity()
 export class History {
@@ -8,8 +10,14 @@ export class History {
     @Column()
     userId: number;
 
+
     @Column()
     quizId: number;
+    @ManyToOne(() => Quiz, quiz => quiz.histories, {
+        onDelete: "CASCADE",
+    })
+    @JoinColumn({ name: 'quizId' })
+    quiz: Quiz;
 
     @Column()
     totalQuestions: number;

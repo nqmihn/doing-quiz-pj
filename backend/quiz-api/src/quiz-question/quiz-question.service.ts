@@ -7,6 +7,7 @@ import { Repository } from 'typeorm';
 import { IQuestionAnswer } from './questionAnswer.interface';
 import { QuizAnswer } from 'src/quiz-answer/entities/quiz-answer.entity';
 import { toArray } from 'rxjs';
+import { History } from 'src/history/entities/history.entity';
 
 @Injectable()
 export class QuizQuestionService {

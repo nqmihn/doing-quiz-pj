@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { postRegister } from "../../services/apiServices";
 import { toast } from "react-toastify";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
+import Language from "../Header/Language";
+import Theme from "../Header/Theme";
 
 const RegisterComponent = (props) => {
   const [email, setEmail] = useState("");
@@ -52,6 +54,8 @@ const RegisterComponent = (props) => {
       <div className="header">
         <span> Already have an account?</span>
         <button onClick={() => navigate("/login")}>Log in</button>
+        <Language />
+        <Theme />
       </div>
       <div className="title col-4 mx-auto">Quiz Page</div>
       <div className="welcome col-4 mx-auto">Start your journey?</div>

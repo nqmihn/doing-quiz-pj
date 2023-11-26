@@ -9,9 +9,13 @@ import { toast } from "react-toastify";
 import { doLogout } from "../../redux/action/userAction";
 import Language from "./Language";
 import { useTranslation, Trans } from "react-i18next";
+
+import Theme from "./Theme";
+
 const Header = () => {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const account = useSelector((state) => state.user.account);
+  const mode = useSelector((state) => state.config.mode);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -75,6 +79,9 @@ const Header = () => {
               </NavDropdown>
             )}
             <Language />
+          </Nav>
+          <Nav>
+            <Theme />
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -6,6 +6,7 @@ import { Outlet } from "react-router-dom";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import { NavDropdown } from "react-bootstrap";
 import Language from "../Header/Language";
+import Theme from "../Header/Theme";
 const Admin = (props) => {
   const [collapsed, setCollapsed] = useState(false);
   return (
@@ -19,6 +20,7 @@ const Admin = (props) => {
             <FaBars className="left-side" />
           </span>
           <div className="right-side">
+            <Theme />
             <Language />
             <NavDropdown title="Settings" id="basic-nav-dropdown">
               <NavDropdown.Item>Log out</NavDropdown.Item>

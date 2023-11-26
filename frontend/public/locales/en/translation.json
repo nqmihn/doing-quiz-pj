@@ -25,5 +25,20 @@
   },
   "quiz": {
     "doing": "Doing Quiz"
+  },
+  "profile": {
+    "info": "User Information",
+    "change-pwd": "Change Password",
+    "history": "History",
+    "save": "Save",
+    "current-pwd": "Current Password",
+    "new-pwd": "New Password",
+    "confirmed-pwd": "Confirmed Password",
+    "table-history": {
+      "q-description": "Quiz Description",
+      "t-question": "Total Question",
+      "t-correct": "Total Correct",
+      "time": "Time"
+    }
   }
 }

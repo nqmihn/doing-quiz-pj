@@ -7,12 +7,15 @@ import { IsNull, Repository } from 'typeorm';
 import { QuizQuestion } from 'src/quiz-question/entities/quiz-question.entity';
 import { IUserAnswer } from 'src/users/userAnswer.interface';
 import { IQuizData, ISystemAnswer, quizResult } from './entities/answer.interface';
+import { History } from 'src/history/entities/history.entity';
+import { IUser } from 'src/users/user.interface';
 
 @Injectable()
 export class QuizAnswerService {
   constructor(@InjectRepository(QuizAnswer)
   private quizAnswerRepository: Repository<QuizAnswer>, @InjectRepository(QuizQuestion)
-    private quizQuestionRepository: Repository<QuizQuestion>,) { }
+    private quizQuestionRepository: Repository<QuizQuestion>, @InjectRepository(History)
+    private HistoryRepository: Repository<History>) { }
   async create(createQuizAnswerDto: CreateQuizAnswerDto) {
     const question = await this.quizQuestionRepository.findOneBy({ id: createQuizAnswerDto.questionId })
     if (!question) {
@@ -51,7 +54,7 @@ export class QuizAnswerService {
     }
     return await this.quizAnswerRepository.delete({ id });
   }
-  async submit(userAnswer: IUserAnswer) {
+  async submit(userAnswer: IUserAnswer, user: IUser) {
     let result: quizResult = {}
     result.quizData = [];
     result.countCorrect = 0;
@@ -90,6 +93,13 @@ export class QuizAnswerService {
     }))
     result.countCorrect = totalCorrect;
     result.countTotal = totalPoint;
+    const totalQuestion = await this.quizQuestionRepository.count({
+      where: {
+        quizId: userAnswer.quizId
+      }
+    })
+    const quizHistory = this.HistoryRepository.create({ quizId: userAnswer.quizId, userId: user.id, totalCorrect: result.countCorrect, totalQuestions: totalQuestion })
+    await this.HistoryRepository.save(quizHistory)
     return result
   }
   async countAnswers() {

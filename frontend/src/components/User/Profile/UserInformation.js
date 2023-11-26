@@ -9,8 +9,10 @@ import { useEffect } from "react";
 import { useState } from "react";
 import HOST_IMAGE_URL from "../../../constants";
 import { toast } from "react-toastify";
+import { useTranslation, Trans } from "react-i18next";
 
 const UserInformation = () => {
+  const { t } = useTranslation();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [role, setRole] = useState("");
@@ -115,7 +117,7 @@ const UserInformation = () => {
             className="btn btn-primary"
             onClick={() => handleChangeProfile()}
           >
-            Save
+            {t("profile.save")}
           </button>
         </div>
       </div>

@@ -16,6 +16,7 @@ import Questions from "./components/Admin/Content/Question/Questions";
 import PrivateRoute from "./routes/PrivateRoute";
 import { Suspense } from "react";
 import UserProfile from "./components/User/Profile/UserProfile";
+import ForgotPassword from "./components/Auth/ForgotPassword";
 const NotFound = () => {
   return (
     <div className="alert alert-danger container mt-3">
@@ -38,8 +39,9 @@ const Layout = (props) => {
             }
           />
           <Route path="/profile" element={<UserProfile />} />
+          <Route path="/quiz/:id" element={<DetailQuiz />} />
         </Route>
-        <Route path="/quiz/:id" element={<DetailQuiz />} />
+
         <Route
           path="admins"
           element={
@@ -55,6 +57,7 @@ const Layout = (props) => {
         </Route>
         <Route path="/login" element={<LoginComponent />}></Route>
         <Route path="/register" element={<RegisterComponent />}></Route>
+        <Route path="/forgot" element={<ForgotPassword />}></Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
       <ToastContainer

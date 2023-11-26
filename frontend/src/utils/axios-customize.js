@@ -1,7 +1,7 @@
 import axios from "axios";
 import NProgress from "nprogress";
 import { store } from "../redux/store";
-import { setAccessToken } from "../redux/action/userAction";
+import { doLogout, setAccessToken } from "../redux/action/userAction";
 NProgress.configure({
   showSpinner: false,
   trickleSpeed: 100,
@@ -43,6 +43,7 @@ instance.interceptors.response.use(
   },
   async function (error) {
     NProgress.done();
+
     if (
       error.response.data &&
       error.response.data.statusCode === 401 &&
@@ -57,15 +58,20 @@ instance.interceptors.response.use(
         localStorage.setItem("access_token", access_token);
         return axios.request(error.config);
       }
+      // else {
+      //   window.location.href = "/login";
+      // }
     }
     if (
       error.config &&
-      error.response &&
-      error.response.statusCode === 400 &&
+      error.response.data &&
+      error.response.data.statusCode === 400 &&
       error.config.url === "/api/v1/auth/refresh"
     ) {
-      window.location.href = "/login";
+      // window.location.href = "/login";
+      store.dispatch(doLogout());
     }
+
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
     return error && error.response && error.response.data

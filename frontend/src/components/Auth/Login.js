@@ -8,6 +8,7 @@ import { doLogin } from "../../redux/action/userAction";
 import { ImSpinner9 } from "react-icons/im";
 import Language from "../Header/Language";
 import { useTranslation, Trans } from "react-i18next";
+import Theme from "../Header/Theme";
 const LoginComponent = (props) => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -63,6 +64,7 @@ const LoginComponent = (props) => {
           {t("auth.signup")}
         </button>
         <Language />
+        <Theme />
       </div>
       <div className="title col-4 mx-auto">Quiz Page</div>
       <div className="welcome col-4 mx-auto">Hello, who’s this?</div>
@@ -86,7 +88,14 @@ const LoginComponent = (props) => {
             onKeyDown={(event) => handleKeyDown(event)}
           />
         </div>
-        <span className="forgot-password">{t("auth.forgot")}</span>
+        <span
+          className="forgot-password"
+          onClick={() => {
+            navigate("/forgot");
+          }}
+        >
+          {t("auth.forgot")}
+        </span>
         <div>
           <button
             className="btn-submit"
