@@ -9,7 +9,8 @@ import { Multer } from 'multer';
 import { IUserAnswer } from 'src/users/userAnswer.interface';
 import { quizResult } from './entities/answer.interface';
 import { IUser } from 'src/users/user.interface';
-
+import { ApiTags } from '@nestjs/swagger';
+@ApiTags("answer")
 @Controller('answer')
 export class QuizAnswerController {
   constructor(private readonly quizAnswerService: QuizAnswerService,) { }

@@ -4,8 +4,9 @@ import { Public, User } from 'src/decorator/customize';
 import { UsersService } from 'src/users/users.service';
 import { ResetPasswordService } from 'src/reset-password/reset-password.service';
 import { uid } from 'uid'
+import { ApiTags } from '@nestjs/swagger';
 
-
+@ApiTags("mail")
 @Controller('mail')
 export class MailController {
   constructor(private readonly mailerService: MailerService, private userService: UsersService, private resetPasswordService: ResetPasswordService) { }
@@ -33,7 +34,7 @@ export class MailController {
         })
         .then(() => { console.log(1) })
         .catch(() => { console.log(2) });
-      return {userId:user.id}
+      return { userId: user.id }
     }
 
   }

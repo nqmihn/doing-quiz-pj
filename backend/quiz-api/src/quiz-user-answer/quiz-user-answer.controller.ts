@@ -2,7 +2,8 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { QuizUserAnswerService } from './quiz-user-answer.service';
 import { CreateQuizUserAnswerDto } from './dto/create-quiz-user-answer.dto';
 import { UpdateQuizUserAnswerDto } from './dto/update-quiz-user-answer.dto';
-
+import { ApiTags } from '@nestjs/swagger';
+@ApiTags("user-answer")
 @Controller('quiz-user-answer')
 export class QuizUserAnswerController {
   constructor(private readonly quizUserAnswerService: QuizUserAnswerService) {}

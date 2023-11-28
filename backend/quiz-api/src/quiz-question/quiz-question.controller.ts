@@ -5,7 +5,8 @@ import { UpdateQuizQuestionDto, UpsertQuizQuestionDto } from './dto/update-quiz-
 import { Public, ResponseMessage } from 'src/decorator/customize';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { IQuestionAnswer } from './questionAnswer.interface';
-
+import { ApiTags } from '@nestjs/swagger';
+@ApiTags("question")
 @Controller('question')
 export class QuizQuestionController {
   constructor(private readonly quizQuestionService: QuizQuestionService) { }

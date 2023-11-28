@@ -4,12 +4,14 @@ import { AuthService } from './auth.service';
 import { Public, ResponseMessage, User } from 'src/decorator/customize';
 import { Response, Request } from 'express';
 import { IUser } from 'src/users/user.interface';
-import { RegisterUserDto } from 'src/users/dto/create-user.dto';
+import { RegisterUserDto, UserLoginDto } from 'src/users/dto/create-user.dto';
 import { UsersService } from 'src/users/users.service';
 import { QuizzesService } from 'src/quizzes/quizzes.service';
 import { QuizQuestionService } from 'src/quiz-question/quiz-question.service';
 import { QuizAnswerService } from 'src/quiz-answer/quiz-answer.service';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { ApiTags, ApiBody } from '@nestjs/swagger';
+@ApiTags('auth')
 @Controller('auth')
 export class AuthController {
     constructor(private authService: AuthService, private userService: UsersService, private quizService: QuizzesService, private quizQuestionService: QuizQuestionService,
@@ -19,6 +21,7 @@ export class AuthController {
     @UseGuards(LocalAuthGuard)
     @ResponseMessage("Login Success")
     @Public()
+    @ApiBody({ type: UserLoginDto })
     @Post('login')
     async login(@Req() req, @Res({ passthrough: true }) response: Response) {
         return this.authService.login(req.user, response);
