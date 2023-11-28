@@ -1,9 +1,15 @@
 .questions-container {
   padding: 15px;
+
   .title {
     margin-bottom: 15px;
     font-size: 20px;
     font-weight: 600;
+  }
+  .question-main {
+    label {
+      z-index: 0;
+    }
   }
   .questions-content {
     display: flex;

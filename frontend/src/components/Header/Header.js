@@ -16,6 +16,7 @@ const Header = () => {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const account = useSelector((state) => state.user.account);
   const mode = useSelector((state) => state.config.mode);
+  const role = useSelector((state) => state.user.role);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -55,7 +56,7 @@ const Header = () => {
               {t("header.quiz")}
             </NavLink>
             <NavLink to="/admins" className="nav-link">
-              {t("header.admin")}
+              {role === "ADMIN" && `${t("header.admin")}`}
             </NavLink>
           </Nav>
           <Nav>

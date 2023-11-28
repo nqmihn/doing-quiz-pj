@@ -11,9 +11,11 @@ import {
 import "./DashBoard.scss";
 import { getOverview } from "../../../services/apiServices";
 import { useEffect, useState } from "react";
+import { useTranslation, Trans } from "react-i18next";
 const DashBoard = (props) => {
   const [dataOverview, setDataOverview] = useState([]);
   const [dataChart, setDataChart] = useState([]);
+  const { t } = useTranslation();
   useEffect(() => {
     fetchDataDashboard();
   }, []);
@@ -47,11 +49,11 @@ const DashBoard = (props) => {
 
   return (
     <div className="dashboard-container">
-      <div className="title">Analytics Dashboard</div>
+      <div className="title">{t("admin.dashboard.title")}</div>
       <div className="content">
         <div className="content-left">
           <div className="content-left-item">
-            <span className="text-1">Total Users</span>
+            <span className="text-1">{t("admin.dashboard.t-user")}</span>
             <span className="text-2">
               {dataOverview &&
               dataOverview.users &&
@@ -63,7 +65,7 @@ const DashBoard = (props) => {
             </span>
           </div>
           <div className="content-left-item">
-            <span className="text-1">Total Quizzes</span>
+            <span className="text-1">{t("admin.dashboard.t-quiz")}</span>
             <span className="text-2">
               {dataOverview &&
               dataOverview.others &&
@@ -75,7 +77,7 @@ const DashBoard = (props) => {
             </span>
           </div>
           <div className="content-left-item">
-            <span className="text-1">Total Questions</span>
+            <span className="text-1">{t("admin.dashboard.t-question")}</span>
             <span className="text-2">
               {dataOverview &&
               dataOverview.others &&
@@ -87,7 +89,7 @@ const DashBoard = (props) => {
             </span>
           </div>
           <div className="content-left-item">
-            <span className="text-1">Total Answers</span>
+            <span className="text-1">{t("admin.dashboard.t-answer")}</span>
             <span className="text-2">
               {dataOverview &&
               dataOverview.others &&

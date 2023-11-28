@@ -17,6 +17,7 @@ import PrivateRoute from "./routes/PrivateRoute";
 import { Suspense } from "react";
 import UserProfile from "./components/User/Profile/UserProfile";
 import ForgotPassword from "./components/Auth/ForgotPassword";
+import AdminRoute from "./routes/AdminRoute";
 const NotFound = () => {
   return (
     <div className="alert alert-danger container mt-3">
@@ -45,9 +46,9 @@ const Layout = (props) => {
         <Route
           path="admins"
           element={
-            <PrivateRoute>
+            <AdminRoute>
               <Admin />
-            </PrivateRoute>
+            </AdminRoute>
           }
         >
           <Route index element={<DashBoard />} />

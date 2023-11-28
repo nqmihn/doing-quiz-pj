@@ -23,6 +23,7 @@ import { History } from './history/entities/history.entity';
 import { MailModule } from './mail/mail.module';
 import { ResetPasswordModule } from './reset-password/reset-password.module';
 import { ResetPassword } from './reset-password/entities/reset-password.entity';
+import { DatabaseModule } from './database/database.module';
 @Module({
   imports: [ConfigModule.forRoot({ isGlobal: true }), TypeOrmModule.forRootAsync({
     imports: [ConfigModule],
@@ -37,7 +38,7 @@ import { ResetPassword } from './reset-password/entities/reset-password.entity';
       synchronize: true,
     }),
     inject: [ConfigService],
-  }), UsersModule, FilesModule, AuthModule, QuizzesModule, UserQuizModule, QuizQuestionModule, QuizAnswerModule, QuizUserAnswerModule, HistoryModule, MailModule, ResetPasswordModule],
+  }), UsersModule, FilesModule, AuthModule, QuizzesModule, UserQuizModule, QuizQuestionModule, QuizAnswerModule, QuizUserAnswerModule, HistoryModule, MailModule, ResetPasswordModule, DatabaseModule],
   controllers: [AppController],
   providers: [AppService,],
 })

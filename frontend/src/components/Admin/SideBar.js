@@ -22,11 +22,13 @@ import sidebarBg from "../../assets/bg2.jpg";
 
 import { DiReact } from "react-icons/di";
 import { MdDashboard } from "react-icons/md";
+import { useTranslation, Trans } from "react-i18next";
 
 import "./SideBar.scss";
 
 const SideBar = (props) => {
   const { image, collapsed, toggled, handleToggleSidebar } = props;
+  const { t } = useTranslation();
   const navigate = useNavigate();
   return (
     <>
@@ -51,7 +53,9 @@ const SideBar = (props) => {
             }}
           >
             <DiReact size={"3em"} color={"00bfff"} />
-            <span onClick={() => navigate("/")}>Quiz Page</span>
+            <span onClick={() => navigate("/")} className="logo">
+              Quiz Page
+            </span>
           </div>
         </SidebarHeader>
 
@@ -66,16 +70,16 @@ const SideBar = (props) => {
             <SubMenu icon={<FaGem />} title="Features">
               <MenuItem>
                 {" "}
-                Quản lý Users
+                {t("admin.manage.user")}
                 <Link to="/admins/manage-users" />
               </MenuItem>
               <MenuItem>
                 {" "}
-                Quản lý Bài Quiz
+                {t("admin.manage.quiz")}
                 <Link to="/admins/manage-quizzes" />
               </MenuItem>
               <MenuItem>
-                Quản lý Câu Hỏi
+                {t("admin.manage.question")}
                 <Link to="/admins/manage-questions" />
               </MenuItem>
             </SubMenu>

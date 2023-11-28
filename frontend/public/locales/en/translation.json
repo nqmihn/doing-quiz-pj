@@ -19,8 +19,11 @@
     "title": "Don't have an account yet?",
     "signup": "Sign Up",
     "password": "Password",
+    "username": "Username",
     "forgot": "Forgot Password",
     "login": "Login",
+    "signup-btn": "Create my free account",
+    "signup-title": "Already have an account?",
     "homepage": "Go to Homepage"
   },
   "quiz": {
@@ -39,6 +42,20 @@
       "t-question": "Total Question",
       "t-correct": "Total Correct",
       "time": "Time"
+    }
+  },
+  "admin": {
+    "dashboard": {
+      "title": "Analytics Dashboard",
+      "t-user": "Total User",
+      "t-quiz": "Total Quiz",
+      "t-question": "Total Question",
+      "t-answer": "Total Answer"
+    },
+    "manage": {
+      "user": "Manage User",
+      "quiz": "Manage Quiz",
+      "question": "Manage Question"
     }
   }
 }

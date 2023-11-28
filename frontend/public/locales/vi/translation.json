@@ -19,8 +19,11 @@
     "title": "Chưa có tài khoản?",
     "signup": "Đăng Ký",
     "password": "Mật Khẩu",
+    "username": "Tên hiển thị",
     "forgot": "Quên Mật Khẩu",
     "login": "Đăng Nhập",
+    "signup-btn": "Tạo tài khoản mới miễn phí",
+    "signup-title": "Đã có tài khoản?",
     "homepage": "Trở về Trang Chủ"
   },
   "quiz": {
@@ -39,6 +42,20 @@
       "t-question": "Tổng số câu",
       "t-correct": "Tổng số câu đúng",
       "time": "Thời gian"
+    }
+  },
+  "admin": {
+    "dashboard": {
+      "title": "Thống kê số liệu",
+      "t-user": "Tổng người dùng",
+      "t-quiz": "Tổng số bài thi",
+      "t-question": "Tổng số câu hỏi",
+      "t-answer": "Tổng số câu trả lời"
+    },
+    "manage": {
+      "user": "Quản lý người dùng",
+      "quiz": "Quản lý bài thi",
+      "question": "Quản lý câu hỏi"
     }
   }
 }

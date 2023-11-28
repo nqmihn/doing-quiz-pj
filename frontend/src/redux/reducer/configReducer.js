@@ -1,7 +1,8 @@
-import { CHANGE_MODE } from "../action/configAction";
+import { CHANGE_LANGUAGE, CHANGE_MODE } from "../action/configAction";
 
 const INITIAL_STATE = {
   mode: "light",
+  language: "en",
 };
 const configReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -9,6 +10,11 @@ const configReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         mode: action.payload,
+      };
+    case CHANGE_LANGUAGE:
+      return {
+        ...state,
+        language: action.payload,
       };
 
     default:

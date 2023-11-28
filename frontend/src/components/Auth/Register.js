@@ -6,12 +6,13 @@ import { toast } from "react-toastify";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import Language from "../Header/Language";
 import Theme from "../Header/Theme";
+import { useTranslation, Trans } from "react-i18next";
 
 const RegisterComponent = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [username, setUsername] = useState("");
-
+  const { t } = useTranslation();
   const [isShowPassword, setIsShowPassword] = useState(false);
 
   const navigate = useNavigate();
@@ -52,8 +53,8 @@ const RegisterComponent = (props) => {
   return (
     <div className="register-container">
       <div className="header">
-        <span> Already have an account?</span>
-        <button onClick={() => navigate("/login")}>Log in</button>
+        <span> {t("auth.signup-title")}</span>
+        <button onClick={() => navigate("/login")}>{t("auth.login")}</button>
         <Language />
         <Theme />
       </div>
@@ -70,7 +71,7 @@ const RegisterComponent = (props) => {
           />
         </div>
         <div className="form-group pass-group">
-          <label>Password (*)</label>
+          <label>{t("auth.password")}</label>
           <input
             type={isShowPassword ? "text" : "password"}
             className="form-control"
@@ -92,7 +93,7 @@ const RegisterComponent = (props) => {
           )}
         </div>
         <div className="form-group">
-          <label>Username</label>
+          <label>{t("auth.username")}</label>
           <input
             type={"text"}
             className="form-control"
@@ -102,7 +103,7 @@ const RegisterComponent = (props) => {
         </div>
         <div>
           <button className="btn-submit" onClick={() => handleRegister()}>
-            Create my free account
+          {t("auth.signup-btn")}
           </button>
         </div>
         <div className="text-center">
@@ -112,7 +113,7 @@ const RegisterComponent = (props) => {
               navigate("/");
             }}
           >
-            &#60;&#60; Go to Homepage
+            &#60;&#60; {t("auth.homepage")}
           </span>
         </div>
       </div>
